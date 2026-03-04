@@ -1,13 +1,8 @@
 package Strategies;
 
-public class AtaqueBolaDeFuego implements Habilidad{
+public class AtaqueBolaDeFuego implements HabilidadStrategy{
     @Override
     public void ejecutar() { 
-        System.out.println("¡Bola de Fuego!"); 
-    }
-
-    @Override
-    public String getNombre() { 
-        return "Bola de Fuego"; 
+        System.out.println("¡El mago lanza una Bola de Fuego!"); 
     }
 }

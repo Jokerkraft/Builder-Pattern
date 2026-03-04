@@ -1,8 +1,10 @@
 package Builders;
 
-public class GuerreroBuilder extends PersonajeBuilder{
+import Models.Guerrero;
+
+public class GuerreroBuilder extends PersonajeBuilder <Guerrero>{
     @Override
-    public void configurarStatsBase() {
-         this.tipo = "Guerrero"; this.f = 10; this.i = 2; this.v = 8; this.r = 8; 
+    public void crearPersonaje(){
+        personaje = new Guerrero();
     }
 }

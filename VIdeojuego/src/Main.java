@@ -1,31 +1,39 @@
 import Builders.PersonajeBuilder;
-import Controller.PersonajeController;
 import Factories.PersonajeFactory;
 import Models.Personaje;
 import Strategies.AtaqueBolaDeFuego;
 import Strategies.AtaqueEspadazo;
-import Views.PersonajeVista;
+import Views.VistaPersonaje;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        PersonajeVista vista = new PersonajeVista();
+        VistaPersonaje vista = new VistaPersonaje();
 
-        // --- CREANDO AL MAGO ---
-        PersonajeBuilder builderMago = PersonajeFactory.obtenerBuilder("mago");
-        builderMago.configurarStatsBase();
-        builderMago.agregarHabilidad(new AtaqueBolaDeFuego());
-        
-        Personaje magoModel = builderMago.build();
-        PersonajeController controlMago = new PersonajeController(magoModel, vista);
-        controlMago.actualizarVista();
+        vista.mostrarNombre("Bienvenido al Sistema de Batallas");
+        vista.saltoDeLinea();
 
-        // --- CREANDO AL GUERRERO ---
-        PersonajeBuilder builderGuerrero = PersonajeFactory.obtenerBuilder("guerrero");
-        builderGuerrero.configurarStatsBase();
-        builderGuerrero.agregarHabilidad(new AtaqueEspadazo());
-        
-        Personaje guerreroModel = builderGuerrero.build();
-        PersonajeController ctrlGuerrero = new PersonajeController(guerreroModel, vista);
-        ctrlGuerrero.actualizarVista();
+        vista.mostrarMensaje("Creando un nuevo personaje...");
+
+        PersonajeBuilder<?> guerreroBuilder = PersonajeFactory.obtenerBuilder("Guerrero");
+        Personaje guerrero = guerreroBuilder
+                .agregarHabilidad(new AtaqueEspadazo())
+                .obtenerPersonaje();
+
+        guerrero.mostrarFicha();
+        guerrero.ejecutarHabilidades();
+        vista.saltoDeLinea();
+
+        vista.mostrarMensaje("Creando un nuevo personaje...");
+        PersonajeBuilder<?> magoBuilder = PersonajeFactory.obtenerBuilder("Mago");
+        Personaje mago = magoBuilder
+                .agregarHabilidad(new AtaqueBolaDeFuego())
+                .obtenerPersonaje();
+
+        mago.mostrarFicha();
+        mago.ejecutarHabilidades();
+
+        vista.saltoDeLinea();
+
+        vista.mostrarNombre("La batalla ha finalizado");
     }
 }

@@ -1,17 +1,25 @@
 package Builders;
 import Models.Personaje;
-import Strategies.Habilidad;
-import java.util.ArrayList;
-import java.util.List;
+import Strategies.HabilidadStrategy;
 
-public abstract class PersonajeBuilder {
-    protected String tipo; protected int f, i, v, r;
-    private final List<Habilidad> habilidades = new ArrayList<>();
-    public abstract void configurarStatsBase();
-    public void agregarHabilidad(Habilidad h) { 
-        habilidades.add(h); 
+public abstract class PersonajeBuilder<T extends Personaje> {
+    protected T personaje;
+
+    public abstract void crearPersonaje();
+
+    public PersonajeBuilder<T> agregarHabilidad(HabilidadStrategy habilidad) {
+        if (this.personaje == null) {
+            crearPersonaje();
+        }
+        
+        this.personaje.agregarHabilidad(habilidad); 
+        return this;
     }
-    public Personaje build() { 
-        return new Personaje(tipo, f, i, v, r, habilidades); 
+
+    public T obtenerPersonaje() {
+        if (this.personaje == null) {
+            crearPersonaje();
+        }
+        return personaje;
     }
 }

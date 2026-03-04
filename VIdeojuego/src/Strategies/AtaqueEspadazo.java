@@ -1,13 +1,8 @@
 package Strategies;
 
-public class AtaqueEspadazo implements Habilidad {
+public class AtaqueEspadazo implements HabilidadStrategy {
     @Override
     public void ejecutar() {
-         System.out.println("¡Espadazo!"); 
+         System.out.println("El guerrero ejecuta un espadazo!"); 
         }
-
-    @Override    
-    public String getNombre() { 
-        return "Ataque con Espada"; 
-    }
 }
