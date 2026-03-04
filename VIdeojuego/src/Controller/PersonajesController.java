@@ -1,4 +1,4 @@
-package Controller; // Según tu explorador de archivos
+package Controller;
 
 import Factories.PersonajeFactory;
 import Models.Personaje;
